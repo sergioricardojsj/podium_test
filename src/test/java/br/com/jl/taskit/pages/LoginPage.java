@@ -4,6 +4,7 @@ import br.com.jl.taskit.constants.TestConstants;
 import br.com.jl.taskit.settings.Log;
 import br.com.jl.taskit.settings.ScreenshotMaker;
 import br.com.jl.taskit.settings.TLDriverFactory;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;

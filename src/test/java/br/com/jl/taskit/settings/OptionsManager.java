@@ -1,9 +1,7 @@
 package br.com.jl.taskit.settings;
 
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
 import java.util.HashMap;
@@ -47,9 +45,11 @@ public class OptionsManager {
 
     public DesiredCapabilities getRemoteChromeOptions() {
         try {
+            ChromeOptions chromeOptions = getChromeOptions();
             DesiredCapabilities capabilities = DesiredCapabilities.chrome();
             capabilities.setPlatform(Platform.LINUX);
             capabilities.setCapability("chrome.verbose", true);
+            capabilities.setCapability(ChromeOptions.CAPABILITY, chromeOptions);
             return capabilities;
         } catch (Exception e) {
             Log.logError(e.getMessage());

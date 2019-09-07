@@ -1,7 +1,6 @@
 package br.com.jl.taskit.listeners;
 
 import br.com.jl.taskit.constants.Browser;
-import br.com.jl.taskit.constants.TestConstants;
 import br.com.jl.taskit.settings.TLDriverFactory;
 import br.com.jl.taskit.settings.Utils;
 import org.testng.IInvokedMethod;

@@ -14,7 +14,19 @@ public abstract class BasePage<T> {
 
     protected WebDriver driver;
 
-    public void click(WebElement element) {
+    public void click(Object webElement) {
+        try {
+            if (webElement instanceof By) {
+                click(driver.findElement((By) webElement));
+            } else if (webElement instanceof WebElement) {
+                click((WebElement) webElement);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void click(WebElement element) {
         try {
             waitForClickableElement(element);
             JavascriptExecutor jse = (JavascriptExecutor) driver;
@@ -27,7 +39,19 @@ public abstract class BasePage<T> {
         }
     }
 
-    public void fillField(WebElement element, String keysToSend) {
+    public void fillField(Object element, String keysToKend) {
+        try {
+            if (element instanceof By) {
+                fillField(driver.findElement((By) element), keysToKend);
+            } else if (element instanceof WebElement) {
+                fillField((WebElement) element, keysToKend);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void fillField(WebElement element, String keysToSend) {
         try {
             element.sendKeys(Keys.CLEAR);
             element.clear();
@@ -60,13 +84,34 @@ public abstract class BasePage<T> {
         }
     }
 
-    public void waitForElementToShowUp(WebElement element) {
+    public void waitForClickableElement(Object element) {
+        try {
+            if (element instanceof By) {
+                getWait(driver).until(ExpectedConditions.elementToBeClickable((By) element));
+            } else if (element instanceof WebDriver) {
+                waitForClickableElement((WebElement) element);
+            }
+        } catch (Exception e) {
+
+        }
+    }
+
+    private void waitForElementToShowUp(WebElement element) {
         try {
             getWait(driver).until(ExpectedConditions.visibilityOf(element));
         } catch (NoSuchElementException e) {
             ScreenshotMaker.takeScreenshot(true);
             Log.logError("Erro ao tentar preencher o campo: " + e.getMessage());
             fail();
+        }
+    }
+
+    public void waitForElementToShowUp(Object element) {
+        try {
+            if (element instanceof By) waitForElementToShowUp(driver.findElement((By) element));
+            else if (element instanceof WebElement) waitForElementToShowUp((WebElement) element);
+        } catch (Exception e) {
+
         }
     }
 
