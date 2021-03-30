@@ -1,0 +1,30 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="firstSuite">
+    <listeners>
+        <listener class-name="com.podium.testautomation.listeners.InvokedMethodListener" />
+    </listeners>
+    <test name="podiumTest" parallel="methods" thread-count="3">
+        <parameter name="browser" value="chrome" />
+        <classes>
+            <class name="com.podium.testautomation.tests.LoginTest">
+                <methods>
+                    <include name="shouldValidateInvalidLogin" />
+                    <include name="shouldValidateLoginWithoutPassword" />
+                    <include name="shouldValidateLoginWithoutEmail" />
+                </methods>
+            </class>
+
+            <class name="com.podium.testautomation.tests.BlogTest">
+                <methods>
+                    <include name="shouldValidateBlogRedirect" />
+                </methods>
+            </class>
+
+            <class name="com.podium.testautomation.tests.DemoTest">
+                <methods>
+                    <include name="shouldValidateRequiredField" />
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>
